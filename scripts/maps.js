@@ -13,10 +13,17 @@ function drawMap(coords) {
         osmUrl,
         {attribution: osmAttrib, subdomains: subDomains}
     ).addTo(map);
+    var businessIcon = new L.Icon.Default({
+        iconUrl: 'pix/map-marker-orange.png'
+    });
 
     var markers = [];
     $(coords).each(function(key, coord) {
-        var marker = L.marker([coord.lat, coord.lon]).addTo(map);
+        var options = {};
+        if (coord.type == 'business') {
+            options.icon = businessIcon;
+        }
+        var marker = L.marker([coord.lat, coord.lon], options).addTo(map);
         marker.bindPopup(coord.address);
         markers.push(marker);
     });

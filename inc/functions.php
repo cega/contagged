@@ -530,6 +530,7 @@ function addCoords(&$coords, $entry, $geocoder)
 {
     $priv = $geocoder->getPrivateCoords($entry);
     if ($priv !== null) {
+        $priv->type = 'private';
         $priv->address = '<b>'
             . $entry['givenname'] . ' ' . $entry['name'] . '</b><br/>'
             . str_replace("\n", '<br/>', $entry['homestreet']);
@@ -538,6 +539,7 @@ function addCoords(&$coords, $entry, $geocoder)
 
     $busi = $geocoder->getBusinessCoords($entry);
     if ($busi !== null) {
+        $busi->type = 'business';
         $busi->address = '<b>' . $entry['organization'] . '<br/>'
             . $entry['givenname'] . ' ' . $entry['name'] . '</b><br/>'
             . $entry['street'] . '<br/>'
